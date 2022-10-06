@@ -4,8 +4,12 @@ import { Header } from "./components";
 import { Home, FullPost, Registration, AddPost, Login } from "./pages";
 
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchAuthMe } from "./redux/slices/auth";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(fetchAuthMe());
   return (
     <>
       <Header />
