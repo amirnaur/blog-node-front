@@ -13,7 +13,6 @@ import { Navigate } from "react-router-dom";
 export const Login = () => {
   const isAuth = useSelector(authStatus);
   const dispatch = useDispatch();
-  console.log(isAuth);
   const {
     register, 
     handleSubmit, 
@@ -29,8 +28,14 @@ export const Login = () => {
     },
     mode: 'onSubmit'
   });
-  const onSubmit = (values) => {
-    dispatch(fetchAuth(values));
+  const onSubmit = async (values) => {
+    const data = await dispatch(fetchAuth(values));
+    if( data.payload && 'token' in data.payload) {
+      window.localStorage.setItem('token', data.payload.token)
+    } else {
+      alert("Не удалось авториоваться");
+    }
+
   }
   if (isAuth) {
     return <Navigate to="/" />
