@@ -24,7 +24,11 @@ const initialState = {
 const postsSlice = createSlice({
     name: 'posts',
     initialState,
-    reducer: {},
+    reducers: {
+        remove: (state, action) => {
+            state.posts.items = state.posts.items.filter(post => post._id !== action.payload)
+        }
+    },
     extraReducers: {
         [fetchPosts.pending]: (state) => {
             state.posts.status = "loading";
@@ -52,4 +56,5 @@ const postsSlice = createSlice({
         }
     }
 })
+export const { remove } = postsSlice.actions;
 export const postsReducer = postsSlice.reducer;
