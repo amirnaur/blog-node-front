@@ -29,7 +29,7 @@ export const Login = () => {
     mode: 'onSubmit'
   });
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values));
+    const data = await dispatch(fetchAuth({...values, isRegister: false}));
     if( data.payload && 'token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token)
     } else {

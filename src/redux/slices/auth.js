@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import instance from "../../api/api";
 
-export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params, isRegister=false) => {
-    const { data } = await instance.post(isRegister ? "auth/register" : "auth/login", params);
+export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
+    const { data } = await instance.post(params.isRegister ? "auth/register" : "auth/login", params);
     return data; 
 })
 export const fetchAuthMe = createAsyncThunk("auth/fetchAuthMe", async () => {

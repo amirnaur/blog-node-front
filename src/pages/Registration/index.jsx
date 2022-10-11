@@ -32,7 +32,7 @@ const dispatch = useDispatch();
     mode: 'onSubmit'
   });
   const onSubmit = async (values) => {
-    const data = await dispatch(fetchAuth(values, true));
+    const data = await dispatch(fetchAuth({...values, isRegister: true}));
     if( data.payload && 'token' in data.payload) {
       window.localStorage.setItem('token', data.payload.token)
     } else {
